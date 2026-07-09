@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import BookCover from '@components/BookCover.astro';
+import { resolveTheme } from '@lib/theme.ts';
+
+const books = await getCollection('books');
+const seriesList = await getCollection('series');
+
+// precompute themes so the template has no async work
+const themeById = new Map<string, string>();
+for (const b of books) themeById.set(b.id, await resolveTheme(b));
+
+// group books by series id (or 'standalone')
+const groups = new Map<string, typeof books>();
+for (const b of books) {
+  const key = b.data.series?.id ?? 'standalone';
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push(b);
+}
+for (const arr of groups.values()) arr.sort((a, b) => a.data.order - b.data.order);
+
+const seriesTitle = (id: string) =>
+  id === 'standalone' ? 'Standalones' : seriesList.find((s) => s.id === id)?.data.title ?? id;
+---
+<BaseLayout title="Reading — Drew Matthews">
+  <div class="shelf">
+    <header class="masthead">
+      <h1>Reading</h1>
+      <p class="tagline">Cheeky field notes from whatever's in my ears on the morning walk.</p>
+    </header>
+    {[...groups.entries()].map(([sid, arr]) => (
+      <section class="series-block">
+        <div class="series-label">{seriesTitle(sid)} <span class="cnt">· {arr.length} book{arr.length > 1 ? 's' : ''}</span></div>
+        <div class="grid">
+          {arr.map((b) => <BookCover book={b} theme={themeById.get(b.id)!} />)}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .shelf { max-width: 760px; margin: 0 auto; padding: 3rem 1.2rem 5rem; }
+  .masthead { margin-bottom: 2.4rem; }
+  h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(2.6rem, 8vw, 4rem);
+    letter-spacing: -0.02em; margin: 0; color: var(--text); }
+  .tagline { color: var(--text-dim); font-size: 1rem; margin: 0.4rem 0 0; max-width: 40ch; }
+  .series-block { margin-bottom: 2rem; }
+  .series-label { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
+    color: var(--text); margin-bottom: 0.8rem; }
+  .series-label .cnt { color: var(--text-dim); font-weight: 400; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  @media (max-width: 640px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; } }
+  @media (max-width: 420px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+</style>

@@ -1,0 +1,29 @@
+/* Each theme sets a small set of tokens. --accent doubles as the highlight-swipe color.
+   Site default and the ACOTAR series currently share the cream/navy/gold look; they are
+   kept as separate blocks so any series can diverge later without touching components. */
+
+:root,
+[data-theme="default"] {
+  --surface: #f2ead7;          /* cream ground */
+  --surface-raised: #fbf6ea;   /* lighter cream card */
+  --text: #16264a;             /* deep navy */
+  --text-dim: #5c6a86;         /* muted navy */
+  --accent: #b07d24;           /* warm gold — links + highlight swipe */
+  --accent-strong: #8a5e14;
+  --border: #e2d8c0;
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Avenir Next', 'Helvetica Neue', -apple-system, system-ui, sans-serif;
+}
+
+/* A Court of Thorns and Roses — modern take on fantasy: flat color, bold headlines */
+[data-theme="acotar"] {
+  --surface: #f2ead7;
+  --surface-raised: #fbf6ea;
+  --text: #16264a;
+  --text-dim: #5c6a86;
+  --accent: #b07d24;
+  --accent-strong: #8a5e14;
+  --border: #e2d8c0;
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Avenir Next', 'Helvetica Neue', -apple-system, system-ui, sans-serif;
+}

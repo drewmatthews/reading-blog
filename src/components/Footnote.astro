@@ -1,0 +1,22 @@
+---
+interface Props {
+  kind: 'gif' | 'meme' | 'quote';
+  media?: string;   // local path for gif/meme (set by build-update)
+  src?: string;     // remote fallback if not yet localized
+  quote?: string;
+  source?: string;
+}
+const { kind, media, src, quote, source } = Astro.props;
+const emoji = kind === 'gif' ? '😮‍💨' : kind === 'meme' ? '💡' : '🎬';
+const mediaSrc = media ?? src ?? '';
+---
+<span
+  class="footnote"
+  tabindex="0"
+  role="button"
+  data-kind={kind}
+  data-emoji={emoji}
+  data-media={mediaSrc}
+  data-quote={quote ?? ''}
+  data-source={source ?? ''}
+><slot /></span>

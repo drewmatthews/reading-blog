@@ -1,0 +1,39 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import ReadingLayout from '@layouts/ReadingLayout.astro';
+import UpdateNav from '@components/UpdateNav.astro';
+import { resolveTheme } from '@lib/theme.ts';
+
+export async function getStaticPaths() {
+  const updates = await getCollection('updates');
+  return updates.map((u) => ({ params: { id: u.id }, props: { update: u } }));
+}
+const { update } = Astro.props;
+const book = await getEntry(update.data.book);
+const theme = await resolveTheme(book);
+const { Content } = await render(update);
+
+// prev/next within the same book, in reading (chronological) order
+const siblings = (await getCollection('updates'))
+  .filter((u) => u.data.book.id === book.id)
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+const idx = siblings.findIndex((u) => u.id === update.id);
+const prev = idx > 0 ? siblings[idx - 1] : null;
+const next = idx < siblings.length - 1 ? siblings[idx + 1] : null;
+const brief = (u: typeof update | null) => (u ? { id: u.id, title: u.data.title } : null);
+---
+<ReadingLayout title={update.data.title} theme={theme} backHref={`/books/${book.id}`} backLabel={book.data.title}>
+  <p class="kicker">{book.data.title} · Ch. {update.data.chapters}</p>
+  <h1>{update.data.title}</h1>
+  <article class="prose"><Content /></article>
+  <UpdateNav prev={brief(prev)} next={brief(next)} bookId={book.id} bookTitle={book.data.title} />
+</ReadingLayout>
+
+<style>
+  .kicker { color: var(--accent-strong); font-size: 0.72rem; letter-spacing: 0.05em;
+    text-transform: uppercase; margin: 0 0 0.4rem; font-weight: 700; }
+  h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(2rem, 6vw, 2.6rem);
+    line-height: 1.05; letter-spacing: -0.015em; margin: 0 0 1.4rem; color: var(--text); }
+  .prose { font-family: var(--font-display); font-size: 1.2rem; line-height: 1.85; color: var(--text); }
+  .prose :global(p) { margin: 0 0 1.3rem; }
+</style>

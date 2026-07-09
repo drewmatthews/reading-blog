@@ -1,0 +1,39 @@
+import { describe, it, expect } from 'vitest';
+import { parseFootnotes } from './parse-footnotes.mjs';
+
+describe('parseFootnotes', () => {
+  it('leaves plain text untouched', () => {
+    const { mdx, footnotes } = parseFootnotes('Just a normal sentence.');
+    expect(mdx).toBe('Just a normal sentence.');
+    expect(footnotes).toEqual([]);
+  });
+
+  it('parses a gif footnote into a Footnote tag', () => {
+    const { mdx, footnotes } = parseFootnotes('Rhys does ==the brooding thing==[gif: https://giphy.com/x.gif] again.');
+    expect(mdx).toBe('Rhys does <Footnote kind="gif" src="https://giphy.com/x.gif">the brooding thing</Footnote> again.');
+    expect(footnotes).toEqual([
+      { kind: 'gif', phrase: 'the brooding thing', src: 'https://giphy.com/x.gif' },
+    ]);
+  });
+
+  it('parses a meme footnote', () => {
+    const { footnotes } = parseFootnotes('==feral==[meme: https://i.img/z.png]');
+    expect(footnotes[0]).toEqual({ kind: 'meme', phrase: 'feral', src: 'https://i.img/z.png' });
+  });
+
+  it('parses a quote with a source', () => {
+    const { mdx, footnotes } = parseFootnotes('==a theatre kid==[quote: "I\'m not bad" — Jessica Rabbit]');
+    expect(mdx).toBe('<Footnote kind="quote" quote="I\'m not bad" source="Jessica Rabbit">a theatre kid</Footnote>');
+    expect(footnotes[0]).toEqual({ kind: 'quote', phrase: 'a theatre kid', quote: "I'm not bad", source: 'Jessica Rabbit' });
+  });
+
+  it('parses a quote with no source', () => {
+    const { footnotes } = parseFootnotes('==x==[quote: "just this"]');
+    expect(footnotes[0]).toEqual({ kind: 'quote', phrase: 'x', quote: 'just this', source: null });
+  });
+
+  it('handles multiple footnotes and preserves emoji', () => {
+    const { footnotes } = parseFootnotes('==a==[gif: u1] then 🫠 ==b==[meme: u2]');
+    expect(footnotes.map((f) => f.kind)).toEqual(['gif', 'meme']);
+  });
+});

@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './themes.css';
+
+html { background: var(--surface); color: var(--text); }
+body { font-family: var(--font-body); margin: 0; -webkit-font-smoothing: antialiased; }
+
+a { color: var(--accent-strong); }
+
+/* the highlight swipe — accent-driven so it re-colors per theme */
+.footnote {
+  cursor: pointer;
+  padding: 0.02em 0.15em;
+  border-radius: 3px;
+  background: linear-gradient(180deg, transparent 55%,
+    color-mix(in srgb, var(--accent) 42%, transparent) 55%);
+  transition: background 0.15s ease;
+}
+.footnote:hover,
+.footnote.is-active {
+  background: linear-gradient(180deg, transparent 45%,
+    color-mix(in srgb, var(--accent) 62%, transparent) 45%);
+}
+.footnote::after {
+  content: attr(data-emoji);
+  font-size: 0.7em; vertical-align: super; margin-left: 1px; opacity: 0.9;
+}

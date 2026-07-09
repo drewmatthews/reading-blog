@@ -1,0 +1,18 @@
+---
+import BaseLayout from './BaseLayout.astro';
+interface Props { title: string; theme: string; backHref: string; backLabel: string; }
+const { title, theme, backHref, backLabel } = Astro.props;
+---
+<BaseLayout title={title} theme={theme}>
+  <div class="frame">
+    <a class="back" href={backHref}>&larr; {backLabel}</a>
+    <slot />
+  </div>
+</BaseLayout>
+
+<style>
+  .frame { max-width: 640px; margin: 0 auto; padding: 1.4rem 1.2rem 5rem; }
+  .back { display: inline-block; margin-bottom: 1.4rem; color: var(--accent-strong);
+    text-decoration: none; font-size: 0.82rem; font-weight: 600; }
+  .back:hover { text-decoration: underline; }
+</style>

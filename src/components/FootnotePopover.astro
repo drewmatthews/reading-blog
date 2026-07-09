@@ -1,0 +1,37 @@
+---
+// Rendered once per page in BaseLayout. All .footnote spans share it.
+---
+<div class="fn-pop" id="fn-pop" role="dialog" aria-modal="false" hidden>
+  <button class="fn-pop-x" aria-label="Close" data-fn-close>×</button>
+  <div class="fn-pop-media" id="fn-pop-media"></div>
+  <div class="fn-pop-body">
+    <div class="fn-pop-kicker" id="fn-pop-kicker"></div>
+    <div class="fn-pop-text" id="fn-pop-text"></div>
+  </div>
+</div>
+
+<style>
+  .fn-pop {
+    position: absolute; z-index: 50; width: 260px;
+    background: var(--surface-raised); border: 1px solid var(--border);
+    border-radius: 12px; box-shadow: 0 16px 40px rgba(22,38,74,.28);
+    overflow: hidden; font-family: var(--font-body);
+  }
+  .fn-pop[hidden] { display: none; }
+  .fn-pop-media { min-height: 0; }
+  .fn-pop-media:not(:empty) { display: flex; align-items: center; justify-content: center;
+    background: var(--surface); border-bottom: 1px solid var(--border); }
+  .fn-pop-media img { max-width: 100%; max-height: 200px; display: block; }
+  .fn-pop-body { padding: 0.7rem 0.85rem 0.85rem; }
+  .fn-pop-kicker { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent-strong); font-weight: 700; margin-bottom: 0.3rem; }
+  .fn-pop-text { font-size: 0.92rem; line-height: 1.45; color: var(--text); }
+  .fn-pop-text .src { display: block; margin-top: 0.4rem; font-size: 0.72rem;
+    color: var(--text-dim); font-style: normal; }
+  .fn-pop-text.quote { font-style: italic; }
+  .fn-pop-x { position: absolute; top: 6px; right: 8px; width: 22px; height: 22px;
+    border: none; border-radius: 50%; background: rgba(22,38,74,.6); color: #fff;
+    cursor: pointer; font-size: 0.9rem; line-height: 1; z-index: 1; }
+</style>
+
+<script src="../scripts/footnotes.client.js"></script>

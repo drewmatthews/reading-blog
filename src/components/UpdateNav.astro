@@ -1,0 +1,29 @@
+---
+interface Props {
+  prev?: { id: string; title: string } | null;
+  next?: { id: string; title: string } | null;
+  bookId: string;
+  bookTitle: string;
+}
+const { prev, next, bookId, bookTitle } = Astro.props;
+---
+<nav class="update-nav">
+  <div class="slot left">
+    {prev ? <a href={`/updates/${prev.id}`}>← {prev.title}</a> : <span></span>}
+  </div>
+  <div class="slot right">
+    {next
+      ? <a href={`/updates/${next.id}`}>{next.title} →</a>
+      : <a class="caught-up" href={`/books/${bookId}`}>You're all caught up on {bookTitle} →</a>}
+  </div>
+</nav>
+
+<style>
+  .update-nav { display: flex; justify-content: space-between; gap: 1rem;
+    margin-top: 2.8rem; padding-top: 1.3rem; border-top: 1px solid var(--border); }
+  .slot { flex: 1; }
+  .slot.right { text-align: right; }
+  .update-nav a { color: var(--accent-strong); text-decoration: none; font-size: 0.9rem; font-weight: 600; }
+  .update-nav a:hover { text-decoration: underline; }
+  .caught-up { font-style: italic; font-weight: 500 !important; }
+</style>
