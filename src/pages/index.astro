@@ -43,8 +43,9 @@ const seriesTitle = (id: string) =>
 <style>
   .shelf { max-width: 760px; margin: 0 auto; padding: 3rem 1.2rem 5rem; }
   .masthead { margin-bottom: 2.4rem; }
-  h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(2.6rem, 8vw, 4rem);
-    letter-spacing: -0.02em; margin: 0; color: var(--text); }
+  h1 { font-family: var(--font-display); font-weight: var(--display-weight);
+    font-size: clamp(2.6rem, 8vw, 4rem); letter-spacing: var(--display-tracking);
+    margin: 0; color: var(--text); }
   .tagline { color: var(--text-dim); font-size: 1rem; margin: 0.4rem 0 0; max-width: 40ch; }
   .series-block { margin-bottom: 2rem; }
   .series-label { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;

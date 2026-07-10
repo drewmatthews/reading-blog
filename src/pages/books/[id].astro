@@ -57,13 +57,14 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'n
     box-shadow: 0 10px 26px rgba(22,38,74,.28); }
   .hero-meta { flex: 1; }
   .author { color: var(--accent-strong); font-size: 0.85rem; margin: 0 0 0.3rem; font-weight: 600; }
-  h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.7rem, 5vw, 2.3rem);
-    line-height: 1.05; letter-spacing: -0.015em; margin: 0 0 0.7rem; color: var(--text); }
+  h1 { font-family: var(--font-display); font-weight: 500;
+    font-size: 6rem; line-height: 1.0; letter-spacing: var(--display-tracking);
+    margin: 0 0 0.7rem; color: var(--text); }
   .stats { display: flex; gap: 0.5rem; flex-wrap: wrap; }
   .stat { font-size: 0.68rem; padding: 0.28em 0.7em; border-radius: 999px;
     background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent-strong);
     border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent); }
-  .intro { font-family: var(--font-display); font-size: 1.1rem; line-height: 1.6; color: var(--text);
+  .intro { font-family: var(--font-reading); font-size: 1.1rem; line-height: 1.6; color: var(--text);
     border-bottom: 1px solid var(--border); padding-bottom: 1.1rem; margin-bottom: 0.4rem; }
   .updates-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--text-dim); margin: 0.8rem 0 0.2rem; font-weight: 700; }
@@ -74,7 +75,8 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'n
   .upd-top { display: flex; justify-content: space-between; }
   .upd-ch { font-size: 0.68rem; color: var(--accent-strong); font-weight: 700; }
   .upd-date { font-size: 0.68rem; color: var(--text-dim); }
-  .upd-title { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem;
-    margin: 0.3rem 0 0.25rem; line-height: 1.15; transition: color .12s; }
+  .upd-title { font-family: var(--font-display); font-weight: var(--display-weight);
+    font-size: 1.5rem; margin: 0.3rem 0 0.25rem; line-height: 1.15; letter-spacing: var(--display-tracking);
+    transition: color .12s; }
   .upd-foot { font-size: 0.68rem; color: var(--text-dim); display: flex; gap: 0.7rem; }
 </style>

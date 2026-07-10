@@ -32,8 +32,9 @@ const brief = (u: typeof update | null) => (u ? { id: u.id, title: u.data.title 
 <style>
   .kicker { color: var(--accent-strong); font-size: 0.72rem; letter-spacing: 0.05em;
     text-transform: uppercase; margin: 0 0 0.4rem; font-weight: 700; }
-  h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(2rem, 6vw, 2.6rem);
-    line-height: 1.05; letter-spacing: -0.015em; margin: 0 0 1.4rem; color: var(--text); }
-  .prose { font-family: var(--font-display); font-size: 1.2rem; line-height: 1.85; color: var(--text); }
+  h1 { font-family: var(--font-display); font-weight: var(--display-weight);
+    font-size: clamp(2.2rem, 6.5vw, 3rem); line-height: 1.08; letter-spacing: var(--display-tracking);
+    margin: 0 0 1.4rem; color: var(--text); }
+  .prose { font-family: var(--font-reading); font-size: 1.2rem; line-height: 1.85; color: var(--text); }
   .prose :global(p) { margin: 0 0 1.3rem; }
 </style>

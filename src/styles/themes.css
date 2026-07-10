@@ -1,6 +1,7 @@
 /* Each theme sets a small set of tokens. --highlight is the footnote marker-swipe color.
-   Site default and the ACOTAR series currently share the cream/navy/gold look; they are
-   kept as separate blocks so any series can diverge later without touching components. */
+   Display type is driven by three tokens (--font-display, --display-weight,
+   --display-tracking) so a series can use a face like blackletter that needs its own
+   weight/tracking without touching component CSS. */
 
 :root,
 [data-theme="default"] {
@@ -12,11 +13,14 @@
   --accent-strong: #8a5e14;
   --highlight: #f3d27a;         /* marker swipe — reads clearly on cream */
   --border: #e2d8c0;
-  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
-  --font-body: 'Avenir Next', 'Helvetica Neue', -apple-system, system-ui, sans-serif;
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;   /* headlines only */
+  --display-weight: 900;
+  --display-tracking: -0.015em;
+  --font-reading: 'Fraunces', 'Iowan Old Style', Georgia, serif;   /* long-form body */
+  --font-body: 'Avenir Next', 'Helvetica Neue', -apple-system, system-ui, sans-serif; /* UI */
 }
 
-/* A Court of Thorns and Roses — modern take on fantasy: flat color, bold headlines */
+/* A Court of Thorns and Roses — blackletter headlines (Pirata One), readable body */
 [data-theme="acotar"] {
   --surface: #f2ead7;
   --surface-raised: #fbf6ea;
@@ -26,6 +30,9 @@
   --accent-strong: #8a5e14;
   --highlight: #f3d27a;
   --border: #e2d8c0;
-  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-display: 'Pirata One', 'Fraunces', Georgia, serif;   /* headlines only */
+  --display-weight: 400;         /* Pirata One ships one weight */
+  --display-tracking: 0.01em;    /* blackletter wants air, not negative tracking */
+  --font-reading: 'Fraunces', 'Iowan Old Style', Georgia, serif;  /* body stays readable */
   --font-body: 'Avenir Next', 'Helvetica Neue', -apple-system, system-ui, sans-serif;
 }
