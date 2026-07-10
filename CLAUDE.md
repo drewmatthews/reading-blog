@@ -21,6 +21,10 @@ update (frontmatter + body). Types:
 
 Marker spacing is tolerant: `== phrase == [ gif: url ]` parses the same as `==phrase==[gif:url]`.
 
+**Callout boxes:** wrap a block in `-= ... =-` to render it as a boxed aside/quote
+(`<Callout>` component). Also standard markdown works in the body — `*italic*`, `**bold**`,
+and numbered/bulleted lists.
+
 1. Save the paste to `inbox/<slug>.md`.
 2. Run `node scripts/build-update.mjs <slug> inbox/<slug>.md` — parses footnotes, downloads
    gif/meme media into `public/media/<slug>/`, writes the final MDX with the Footnote import.

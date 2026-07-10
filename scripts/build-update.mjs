@@ -35,9 +35,16 @@ for (const f of mediaFootnotes) {
   mdx = mdx.replace(`src="${escSrc}"`, `media="${localPath}"`);
 }
 
-const importLine = footnotes.length
-  ? `import Footnote from '@components/Footnote.astro';\n\n`
-  : '';
-const out = `---\n${frontmatter}\n---\n${importLine}${mdx}\n`;
+// wrap -= ... =- blocks in a Callout box (aside / box-quote)
+mdx = mdx.replace(
+  /-=\s*([\s\S]*?)\s*=-/g,
+  (_m, inner) => `\n\n<Callout>\n${inner.trim()}\n</Callout>\n\n`
+);
+
+const imports = [];
+if (footnotes.length) imports.push("import Footnote from '@components/Footnote.astro';");
+if (/<Callout>/.test(mdx)) imports.push("import Callout from '@components/Callout.astro';");
+const importBlock = imports.length ? `${imports.join('\n')}\n\n` : '';
+const out = `---\n${frontmatter}\n---\n${importBlock}${mdx}\n`;
 await writeFile(`src/content/updates/${slug}.mdx`, out);
 console.log(`Wrote src/content/updates/${slug}.mdx (${footnotes.length} footnotes, ${mediaFootnotes.length} media)`);
