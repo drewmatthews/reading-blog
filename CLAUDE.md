@@ -14,7 +14,7 @@ the vault at `~/Vault/Projects/Personal/Reading/`.
 ## Adding an update (the normal task)
 Drew drafts in Notion using `==phrase==[type: value]` footnote shorthand, then pastes the
 update (frontmatter + body). Types:
-- `gif` / `meme` — value is an image URL; downloaded locally, shown in the popover.
+- `gif` / `meme` (aliases `img` / `image`) — value is an image URL; downloaded locally, shown in the popover.
 - `quote` — value is `"text" — source`; shown as a styled quote.
 - `link` (alias `url`) — value is a URL. YouTube links embed the player in the popover;
   other links render an "Open ↗" that opens in a new tab. Nothing is downloaded.

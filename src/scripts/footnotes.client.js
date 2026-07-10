@@ -56,8 +56,9 @@ function init() {
     } else if (kind === 'link') {
       const id = ytId(el.dataset.href);
       if (id) {
+        const t = (el.dataset.href.match(/[?&]t=(\d+)/) || [])[1];
         const frame = document.createElement('iframe');
-        frame.src = `https://www.youtube.com/embed/${id}`;
+        frame.src = `https://www.youtube.com/embed/${id}${t ? `?start=${t}` : ''}`;
         frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
         frame.allowFullscreen = true;
         mediaEl.replaceChildren(frame);

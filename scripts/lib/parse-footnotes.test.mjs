@@ -48,6 +48,18 @@ describe('parseFootnotes', () => {
     expect(footnotes[0]).toEqual({ kind: 'link', phrase: 'clone wars', href: 'https://youtube.com/watch?v=xyz' });
   });
 
+  it('unwraps google redirect links to the real target', () => {
+    const { footnotes } = parseFootnotes(
+      '==k==[url: https://www.google.com/url?sa=t&url=https%3A%2F%2Fyoutu.be%2Fabc123&ved=x]'
+    );
+    expect(footnotes[0].href).toBe('https://youtu.be/abc123');
+  });
+
+  it('treats img/image as a downloadable meme image', () => {
+    const { footnotes } = parseFootnotes('==old==[img: https://x.test/a.jpg]');
+    expect(footnotes[0]).toEqual({ kind: 'meme', phrase: 'old', src: 'https://x.test/a.jpg' });
+  });
+
   it('tolerates loose spacing around the marker', () => {
     const { mdx, footnotes } = parseFootnotes('she ==cant dance worth a shit ==[ gif: https://x.gif ] lol');
     expect(footnotes[0]).toEqual({ kind: 'gif', phrase: 'cant dance worth a shit', src: 'https://x.gif' });
