@@ -1,4 +1,4 @@
-/* Each theme sets a small set of tokens. --accent doubles as the highlight-swipe color.
+/* Each theme sets a small set of tokens. --highlight is the footnote marker-swipe color.
    Site default and the ACOTAR series currently share the cream/navy/gold look; they are
    kept as separate blocks so any series can diverge later without touching components. */
 
@@ -8,8 +8,9 @@
   --surface-raised: #fbf6ea;   /* lighter cream card */
   --text: #16264a;             /* deep navy */
   --text-dim: #5c6a86;         /* muted navy */
-  --accent: #b07d24;           /* warm gold — links + highlight swipe */
+  --accent: #b07d24;           /* warm gold — links */
   --accent-strong: #8a5e14;
+  --highlight: #f3d27a;         /* marker swipe — reads clearly on cream */
   --border: #e2d8c0;
   --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
   --font-body: 'Avenir Next', 'Helvetica Neue', -apple-system, system-ui, sans-serif;
@@ -23,6 +24,7 @@
   --text-dim: #5c6a86;
   --accent: #b07d24;
   --accent-strong: #8a5e14;
+  --highlight: #f3d27a;
   --border: #e2d8c0;
   --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
   --font-body: 'Avenir Next', 'Helvetica Neue', -apple-system, system-ui, sans-serif;

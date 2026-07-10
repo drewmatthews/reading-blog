@@ -1,29 +1,34 @@
+/* @import MUST come before the @tailwind directives, or the CSS spec drops it
+   and none of the theme tokens load. */
+@import './themes.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import './themes.css';
 
 html { background: var(--surface); color: var(--text); }
 body { font-family: var(--font-body); margin: 0; -webkit-font-smoothing: antialiased; }
 
 a { color: var(--accent-strong); }
 
-/* the highlight swipe — accent-driven so it re-colors per theme */
+/* the highlight swipe — solid marker-gold so it reads on cream; wraps across lines */
 .footnote {
   cursor: pointer;
-  padding: 0.02em 0.15em;
-  border-radius: 3px;
-  background: linear-gradient(180deg, transparent 55%,
-    color-mix(in srgb, var(--accent) 42%, transparent) 55%);
-  transition: background 0.15s ease;
+  padding: 0.02em 0.08em;
+  border-radius: 2px;
+  background-image: linear-gradient(180deg,
+    transparent 54%, var(--highlight) 54%, var(--highlight) 94%, transparent 94%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: filter 0.15s ease;
 }
 .footnote:hover,
 .footnote.is-active {
-  background: linear-gradient(180deg, transparent 45%,
-    color-mix(in srgb, var(--accent) 62%, transparent) 45%);
+  filter: saturate(1.15) brightness(0.97);
+  background-image: linear-gradient(180deg,
+    transparent 46%, var(--highlight) 46%, var(--highlight) 97%, transparent 97%);
 }
 .footnote::after {
   content: attr(data-emoji);
-  font-size: 0.7em; vertical-align: super; margin-left: 1px; opacity: 0.9;
+  font-size: 0.62em; vertical-align: super; margin-left: 2px; opacity: 0.95;
 }

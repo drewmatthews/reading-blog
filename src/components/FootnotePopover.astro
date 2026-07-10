@@ -1,6 +1,8 @@
 ---
 // Rendered once per page in BaseLayout. All .footnote spans share it.
+// Backdrop + fixed positioning keeps the card cleanly above content on any screen.
 ---
+<div class="fn-backdrop" id="fn-backdrop" hidden></div>
 <div class="fn-pop" id="fn-pop" role="dialog" aria-modal="false" hidden>
   <button class="fn-pop-x" aria-label="Close" data-fn-close>×</button>
   <div class="fn-pop-media" id="fn-pop-media"></div>
@@ -11,27 +13,39 @@
 </div>
 
 <style>
+  .fn-backdrop { position: fixed; inset: 0; z-index: 60; background: rgba(16, 22, 40, 0.32); }
+  .fn-backdrop[hidden] { display: none; }
+
   .fn-pop {
-    position: absolute; z-index: 50; width: 260px;
-    background: var(--surface-raised); border: 1px solid var(--border);
-    border-radius: 12px; box-shadow: 0 16px 40px rgba(22,38,74,.28);
-    overflow: hidden; font-family: var(--font-body);
+    position: fixed; z-index: 61;
+    width: min(300px, calc(100vw - 24px));
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: 0 18px 46px rgba(16, 22, 40, 0.34);
+    overflow: hidden;
+    font-family: var(--font-body);
   }
   .fn-pop[hidden] { display: none; }
-  .fn-pop-media { min-height: 0; }
-  .fn-pop-media:not(:empty) { display: flex; align-items: center; justify-content: center;
-    background: var(--surface); border-bottom: 1px solid var(--border); }
-  .fn-pop-media img { max-width: 100%; max-height: 200px; display: block; }
-  .fn-pop-body { padding: 0.7rem 0.85rem 0.85rem; }
+
+  .fn-pop-media:not(:empty) {
+    display: flex; align-items: center; justify-content: center;
+    background: #0c1120; border-bottom: 1px solid var(--border);
+  }
+  .fn-pop-media img { width: 100%; max-height: 190px; object-fit: cover; display: block; }
+
+  .fn-pop-body { padding: 0.75rem 0.9rem 0.9rem; background: var(--surface-raised); }
   .fn-pop-kicker { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--accent-strong); font-weight: 700; margin-bottom: 0.3rem; }
-  .fn-pop-text { font-size: 0.92rem; line-height: 1.45; color: var(--text); }
-  .fn-pop-text .src { display: block; margin-top: 0.4rem; font-size: 0.72rem;
+  .fn-pop-text { font-size: 0.95rem; line-height: 1.45; color: var(--text); }
+  .fn-pop-text .src { display: block; margin-top: 0.45rem; font-size: 0.74rem;
     color: var(--text-dim); font-style: normal; }
   .fn-pop-text.quote { font-style: italic; }
-  .fn-pop-x { position: absolute; top: 6px; right: 8px; width: 22px; height: 22px;
-    border: none; border-radius: 50%; background: rgba(22,38,74,.6); color: #fff;
-    cursor: pointer; font-size: 0.9rem; line-height: 1; z-index: 1; }
+
+  .fn-pop-x { position: absolute; top: 8px; right: 8px; width: 26px; height: 26px;
+    border: none; border-radius: 50%; background: rgba(16, 22, 40, 0.62); color: #fff;
+    cursor: pointer; font-size: 1rem; line-height: 1; z-index: 1;
+    display: flex; align-items: center; justify-content: center; }
 </style>
 
 <script src="../scripts/footnotes.client.js"></script>
