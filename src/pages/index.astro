@@ -23,7 +23,7 @@ for (const arr of groups.values()) arr.sort((a, b) => a.data.order - b.data.orde
 const seriesTitle = (id: string) =>
   id === 'standalone' ? 'Standalones' : seriesList.find((s) => s.id === id)?.data.title ?? id;
 ---
-<BaseLayout title="Reading — Drew Matthews">
+<BaseLayout title="Reading — Drew Matthews" theme="shell">
   <div class="shelf">
     <header class="masthead">
       <h1>Reading</h1>
@@ -48,9 +48,10 @@ const seriesTitle = (id: string) =>
     margin: 0; color: var(--text); }
   .tagline { color: var(--text-dim); font-size: 1rem; margin: 0.4rem 0 0; max-width: 40ch; }
   .series-block { margin-bottom: 2rem; }
-  .series-label { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
-    color: var(--text); margin-bottom: 0.8rem; }
-  .series-label .cnt { color: var(--text-dim); font-weight: 400; }
+  .series-label { font-family: var(--font-body); font-weight: 700; font-size: 0.78rem;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--text);
+    margin-bottom: 0.9rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .series-label .cnt { color: var(--text-dim); font-weight: 400; letter-spacing: 0; text-transform: none; }
   .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
   @media (max-width: 640px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; } }
   @media (max-width: 420px) { .grid { grid-template-columns: repeat(2, 1fr); } }

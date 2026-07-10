@@ -36,3 +36,21 @@
   --font-reading: 'Fraunces', 'Iowan Old Style', Georgia, serif;  /* body stays readable */
   --font-body: 'Avenir Next', 'Helvetica Neue', -apple-system, system-ui, sans-serif;
 }
+
+/* Shell — the neutral, book-agnostic chrome for the bookshelf. Swiss: white ground,
+   black Helvetica, grid, whitespace. Never inherits a book's theme. */
+[data-theme="shell"] {
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --text: #111111;
+  --text-dim: #6b6b6b;
+  --accent: #111111;
+  --accent-strong: #000000;
+  --highlight: #ffe14d;
+  --border: #e4e4e4;
+  --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --display-weight: 700;
+  --display-tracking: -0.02em;
+  --font-reading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
