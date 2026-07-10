@@ -45,4 +45,10 @@ const fullDate = update.data.date.toLocaleDateString('en-US', { month: 'long', d
   .pubdate { color: var(--text-dim); font-size: 0.85rem; }
   .prose { font-family: var(--font-reading); font-size: 1.2rem; line-height: 1.85; color: var(--text); }
   .prose :global(p) { margin: 0 0 1.3rem; }
+  /* restore list markers stripped by Tailwind's base reset */
+  .prose :global(ol), .prose :global(ul) { margin: 0 0 1.3rem; padding-left: 1.7rem; }
+  .prose :global(ol) { list-style: decimal; }
+  .prose :global(ul) { list-style: disc; }
+  .prose :global(li) { margin: 0 0 0.25rem; padding-left: 0.2rem; }
+  .prose :global(li p) { margin: 0; }
 </style>
