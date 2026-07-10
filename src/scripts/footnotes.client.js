@@ -1,7 +1,16 @@
 // Shared footnote popover. Uses fixed positioning + a backdrop so the card always
 // sits cleanly above content (no bleed-through) and behaves on mobile. Dismiss via
 // ×, backdrop tap, outside click, Escape, or scroll.
-const KICKERS = { gif: 'Reaction gif', meme: 'Meme', quote: 'Movie quote' };
+// Kinds: gif/meme (local media), quote (text), link (YouTube embeds in place; other
+// links become an "open ↗" that leaves in a new tab).
+const KICKERS = { gif: 'Reaction gif', meme: 'Meme', quote: 'Movie quote', link: 'Link' };
+
+function ytId(url) {
+  const m = (url || '').match(
+    /(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{6,})/
+  );
+  return m ? m[1] : null;
+}
 
 function init() {
   const pop = document.getElementById('fn-pop');
@@ -15,6 +24,7 @@ function init() {
   function hide() {
     pop.hidden = true;
     backdrop.hidden = true;
+    mediaEl.replaceChildren();  // tear down any iframe so audio/video stops
     if (active) { active.classList.remove('is-active'); active = null; }
   }
 
@@ -43,6 +53,26 @@ function init() {
       textEl.innerHTML =
         `“${el.dataset.quote}”` +
         (el.dataset.source ? `<span class="src">— ${el.dataset.source}</span>` : '');
+    } else if (kind === 'link') {
+      const id = ytId(el.dataset.href);
+      if (id) {
+        const frame = document.createElement('iframe');
+        frame.src = `https://www.youtube.com/embed/${id}`;
+        frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        frame.allowFullscreen = true;
+        mediaEl.replaceChildren(frame);
+        kickerEl.textContent = 'Video';
+      } else {
+        mediaEl.replaceChildren();
+      }
+      textEl.className = 'fn-pop-text';
+      const a = document.createElement('a');
+      a.href = el.dataset.href;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.className = 'fn-link';
+      a.textContent = id ? 'Watch on YouTube ↗' : 'Open link ↗';
+      textEl.replaceChildren(document.createTextNode(`${el.textContent}  `), a);
     } else {
       const img = document.createElement('img');
       img.src = el.dataset.media;

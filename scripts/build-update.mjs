@@ -18,7 +18,7 @@ const [, frontmatter, body] = fmMatch;
 
 let { mdx, footnotes } = parseFootnotes(body);
 
-const mediaFootnotes = footnotes.filter((f) => f.kind !== 'quote');
+const mediaFootnotes = footnotes.filter((f) => f.kind === 'gif' || f.kind === 'meme');
 if (mediaFootnotes.length) await mkdir(`public/media/${slug}`, { recursive: true });
 
 let i = 0;

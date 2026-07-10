@@ -12,13 +12,23 @@ the vault at `~/Vault/Projects/Personal/Reading/`.
    --font-display, --font-body). --accent doubles as the highlight-swipe color.
 
 ## Adding an update (the normal task)
-Drew drafts in Notion using `==phrase==[type: value]` footnote shorthand
-(type = gif | meme | quote; quote value is `"text" — source`), then pastes the update
-(frontmatter + body).
+Drew drafts in Notion using `==phrase==[type: value]` footnote shorthand, then pastes the
+update (frontmatter + body). Types:
+- `gif` / `meme` — value is an image URL; downloaded locally, shown in the popover.
+- `quote` — value is `"text" — source`; shown as a styled quote.
+- `link` (alias `url`) — value is a URL. YouTube links embed the player in the popover;
+  other links render an "Open ↗" that opens in a new tab. Nothing is downloaded.
+
+Marker spacing is tolerant: `== phrase == [ gif: url ]` parses the same as `==phrase==[gif:url]`.
+
 1. Save the paste to `inbox/<slug>.md`.
 2. Run `node scripts/build-update.mjs <slug> inbox/<slug>.md` — parses footnotes, downloads
    gif/meme media into `public/media/<slug>/`, writes the final MDX with the Footnote import.
 3. `npm run build`, eyeball it, delete the inbox file, commit.
+
+### Updating an existing entry
+Re-run with the **same slug** — it overwrites `src/content/updates/<slug>.mdx`. First clear
+`public/media/<slug>/` so removed gifs don't leave stale numbered files, then re-run step 2.
 
 Update frontmatter: `title`, `book` (book slug), `chapters`, `date`, optional `rating`, `prediction`.
 

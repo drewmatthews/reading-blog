@@ -37,6 +37,17 @@ describe('parseFootnotes', () => {
     expect(footnotes.map((f) => f.kind)).toEqual(['gif', 'meme']);
   });
 
+  it('parses a link footnote', () => {
+    const { mdx, footnotes } = parseFootnotes('he is a ==HOE==[link: https://youtu.be/abc123]');
+    expect(footnotes[0]).toEqual({ kind: 'link', phrase: 'HOE', href: 'https://youtu.be/abc123' });
+    expect(mdx).toBe('he is a <Footnote kind="link" href="https://youtu.be/abc123">HOE</Footnote>');
+  });
+
+  it('treats url as an alias for link', () => {
+    const { footnotes } = parseFootnotes('==clone wars==[url: https://youtube.com/watch?v=xyz]');
+    expect(footnotes[0]).toEqual({ kind: 'link', phrase: 'clone wars', href: 'https://youtube.com/watch?v=xyz' });
+  });
+
   it('tolerates loose spacing around the marker', () => {
     const { mdx, footnotes } = parseFootnotes('she ==cant dance worth a shit ==[ gif: https://x.gif ] lol');
     expect(footnotes[0]).toEqual({ kind: 'gif', phrase: 'cant dance worth a shit', src: 'https://x.gif' });
