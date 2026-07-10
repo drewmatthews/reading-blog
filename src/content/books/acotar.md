@@ -8,4 +8,4 @@ format: "GraphicAudio"
 cover: ./covers/acotar.jpg
 ---
 
-Book one, and I'm doing it GraphicAudio style — full cast, sound effects, the works — on my morning walks. A huntress, a stolen life across the wall, and a masked court that is Very Normal, I'm sure. Updates from the trail. 🏹
+Ok, ok so I've been bullied into reading these books. But if you know anything about me is that I'm not much of a reader. So I'm giving audiobooks a go. So while I'm out for my walk I'm going to listen and I'm going to take notes. Somedays I'm just walking and other days I'll be running cause if listening to a whiney girl isn't enough I'm going to learn to run while I'm at it. Well, at least on Mondays, Wednesdays and Fridays. So join me as I try to get into this. I'll write updates about my progress and my thoughts about the book. It's characters and all sorts of tangents. Cause I'm nobody without sidebars and stories.

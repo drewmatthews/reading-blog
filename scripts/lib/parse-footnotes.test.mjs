@@ -36,4 +36,10 @@ describe('parseFootnotes', () => {
     const { footnotes } = parseFootnotes('==a==[gif: u1] then 🫠 ==b==[meme: u2]');
     expect(footnotes.map((f) => f.kind)).toEqual(['gif', 'meme']);
   });
+
+  it('tolerates loose spacing around the marker', () => {
+    const { mdx, footnotes } = parseFootnotes('she ==cant dance worth a shit ==[ gif: https://x.gif ] lol');
+    expect(footnotes[0]).toEqual({ kind: 'gif', phrase: 'cant dance worth a shit', src: 'https://x.gif' });
+    expect(mdx).toBe('she <Footnote kind="gif" src="https://x.gif">cant dance worth a shit</Footnote> lol');
+  });
 });

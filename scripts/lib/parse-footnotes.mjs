@@ -1,5 +1,6 @@
-// Matches: ==phrase==[type: value]
-const RE = /==([^=]+?)==\[(gif|meme|quote):\s*([^\]]+)\]/g;
+// Matches: ==phrase==[type: value] — tolerant of surrounding whitespace,
+// e.g. `== phrase ==[ gif : url ]`, so natural typing in Notion just works.
+const RE = /==\s*([^=]+?)\s*==\s*\[\s*(gif|meme|quote)\s*:\s*([^\]]+?)\s*\]/g;
 
 function esc(s) {
   return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');

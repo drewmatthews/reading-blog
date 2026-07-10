@@ -30,7 +30,9 @@ for (const f of mediaFootnotes) {
   const ext = extname(new URL(f.src).pathname) || '.gif';
   const localPath = `/media/${slug}/${i}${ext}`;
   await writeFile(`public${localPath}`, buf);
-  mdx = mdx.replace(`src="${f.src.replace(/"/g, '&quot;')}"`, `media="${localPath}"`);
+  // match the exact (HTML-escaped) src the parser emitted, so `&` in URLs still swaps
+  const escSrc = f.src.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+  mdx = mdx.replace(`src="${escSrc}"`, `media="${localPath}"`);
 }
 
 const importLine = footnotes.length
