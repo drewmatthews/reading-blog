@@ -21,20 +21,28 @@ const idx = siblings.findIndex((u) => u.id === update.id);
 const prev = idx > 0 ? siblings[idx - 1] : null;
 const next = idx < siblings.length - 1 ? siblings[idx + 1] : null;
 const brief = (u: typeof update | null) => (u ? { id: u.id, title: u.data.title } : null);
+const fullDate = update.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 ---
 <ReadingLayout title={update.data.title} theme={theme} backHref={`/books/${book.id}`} backLabel={book.data.title}>
-  <p class="kicker">{book.data.title} · Ch. {update.data.chapters}</p>
   <h1>{update.data.title}</h1>
+  <div class="meta">
+    <span class="kicker">Ch. {update.data.chapters}</span>
+    <span class="dot">·</span>
+    <span class="pubdate">{fullDate}</span>
+  </div>
   <article class="prose"><Content /></article>
   <UpdateNav prev={brief(prev)} next={brief(next)} bookId={book.id} bookTitle={book.data.title} />
 </ReadingLayout>
 
 <style>
-  .kicker { color: var(--accent-strong); font-size: 0.72rem; letter-spacing: 0.05em;
-    text-transform: uppercase; margin: 0 0 0.4rem; font-weight: 700; }
   h1 { font-family: var(--font-display); font-weight: var(--display-weight);
-    font-size: clamp(2.2rem, 6.5vw, 3rem); line-height: 1.08; letter-spacing: var(--display-tracking);
+    font-size: 4.5rem; line-height: 1.0; letter-spacing: var(--display-tracking);
     margin: 0 0 1.4rem; color: var(--text); }
+  .meta { display: flex; align-items: baseline; gap: 0.5rem; margin: 0 0 1.8rem; }
+  .meta .dot { color: var(--text-dim); font-size: 0.85rem; }
+  .kicker { color: var(--accent-strong); font-size: 0.72rem; letter-spacing: 0.05em;
+    text-transform: uppercase; font-weight: 700; }
+  .pubdate { color: var(--text-dim); font-size: 0.85rem; }
   .prose { font-family: var(--font-reading); font-size: 1.2rem; line-height: 1.85; color: var(--text); }
   .prose :global(p) { margin: 0 0 1.3rem; }
 </style>
