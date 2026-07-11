@@ -12,21 +12,29 @@ body { font-family: var(--font-body); margin: 0; -webkit-font-smoothing: antiali
 a { color: var(--accent-strong); }
 
 /* the highlight swipe — solid marker-gold so it reads on cream; wraps across lines */
+/* Hand-drawn highlighter-marker effect (adapted from max.hn). Padding + negative
+   margin fills the full glyph height and overshoots the word edges; the uneven-
+   opacity gradient reads like real translucent marker ink; the asymmetric radius
+   gives organic ends. */
 .footnote {
   cursor: pointer;
-  padding: 0.02em 0.08em;
-  border-radius: 2px;
-  background-image: linear-gradient(180deg,
-    transparent 54%, var(--highlight) 54%, var(--highlight) 94%, transparent 94%);
-  box-decoration-break: clone;
+  margin: 0 -0.45em;
+  padding: 0.12em 0.45em;
+  border-radius: 0.8em 0.3em;
+  background: transparent;
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--highlight) 38%, transparent),
+    color-mix(in srgb, var(--highlight) 74%, transparent) 5%,
+    color-mix(in srgb, var(--highlight) 50%, transparent)
+  );
   -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   transition: filter 0.15s ease;
 }
 .footnote:hover,
 .footnote.is-active {
-  filter: saturate(1.15) brightness(0.97);
-  background-image: linear-gradient(180deg,
-    transparent 46%, var(--highlight) 46%, var(--highlight) 97%, transparent 97%);
+  filter: saturate(1.1) brightness(0.97);
 }
 .footnote::after {
   content: attr(data-emoji);

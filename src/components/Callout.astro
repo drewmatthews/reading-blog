@@ -5,17 +5,20 @@
 <aside class="callout"><slot /></aside>
 
 <style>
+  /* Editorial aside — no box, no bar, no fill. Indented italic serif set off by
+     thin gold hairlines, so it reads as a raised-voice interjection. */
   aside.callout {
-    margin: 1.9rem 0;
-    padding: 1rem 1.3rem;
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--accent);
-    border-radius: 6px;
-    background: var(--surface-raised);
+    margin: 2.4rem 1.6rem;
+    padding: 1.3rem 0;
+    border-top: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
     font-family: var(--font-reading);
-    font-size: 1.05rem;
-    line-height: 1.65;
+    font-style: italic;
+    font-size: 1.12rem;
+    line-height: 1.7;
+    color: var(--text);
   }
   aside.callout :global(p) { margin: 0; }
   aside.callout :global(p + p) { margin-top: 0.8rem; }
+  @media (max-width: 520px) { aside.callout { margin-left: 0; margin-right: 0; } }
 </style>
