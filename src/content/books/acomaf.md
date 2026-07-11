@@ -8,6 +8,4 @@ format: "GraphicAudio"
 cover: ./covers/acomaf.jpg
 ---
 
-Book two. Word on the street — and from everyone who bullied me into book one — is that THIS is where the whole thing supposedly gets good. Bold claim. Rhys and those Gucci boots have a lot to answer for. Let's find out. 🍷
-
-*(placeholder intro — rewrite this in your own voice whenever.)*
+Cauldron boil me, here we go again… Book two. Apparently I've been under the mountain this whole time, because book one is the worst of the set. Even my kid says so. Who let them read this?!? That THIS is where the whole thing supposedly gets good. Bold claim. No more Mandy, Tam is probably Mr 🚩, Lucien is still hopefully dropping quips, and good ol' Rhys and those Gucci boots have a lot to answer for. Time to start walking!
