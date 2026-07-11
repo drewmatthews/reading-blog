@@ -3,6 +3,11 @@
 Drew's public reading blog. Astro + Tailwind + MDX, static export. Spec + plan live in
 the vault at `~/Vault/Projects/Personal/Reading/`.
 
+## Publishing — go straight to live
+**Every content change ships directly: commit + push to `main`.** GitHub Pages deploys
+automatically (`.github/workflows/deploy.yml`). No dev-preview/eyeball step — traffic is
+low, so fix-forward. If the build breaks, CI fails and the old site stays up. (Decided 2026-07-11.)
+
 ## Architecture (three-layer)
 1. Content — `src/content/{series,books,updates}/`. Schema in `src/content.config.ts`.
 2. Structure — `src/components`, `src/layouts`, `src/pages`. Use CSS custom properties, never raw colors.
@@ -28,7 +33,7 @@ and numbered/bulleted lists.
 1. Save the paste to `inbox/<slug>.md`.
 2. Run `node scripts/build-update.mjs <slug> inbox/<slug>.md` — parses footnotes, downloads
    gif/meme media into `public/media/<slug>/`, writes the final MDX with the Footnote import.
-3. `npm run build`, eyeball it, delete the inbox file, commit.
+3. `npm run build` (sanity check only), delete the inbox file, commit + push — it's live.
 
 ### Updating an existing entry
 Re-run with the **same slug** — it overwrites `src/content/updates/<slug>.mdx`. First clear
