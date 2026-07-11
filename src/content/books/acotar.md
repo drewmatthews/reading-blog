@@ -3,7 +3,7 @@ title: "A Court of Thorns and Roses"
 author: "Sarah J. Maas"
 series: acotar
 order: 1
-status: reading
+status: finished
 format: "GraphicAudio"
 cover: ./covers/acotar.jpg
 ---
